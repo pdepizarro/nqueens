@@ -80,31 +80,30 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      # Necesario para KVM (emulador más estable/rápido)
       - name: Enable KVM
         run: |
           sudo apt-get update
           sudo apt-get install -y qemu-kvm
           sudo usermod -aG kvm $USER || true
 
-      # Ejecuta instrumentation tests (Compose UI / integración) en emulador
       - name: Run instrumentation tests (connectedDebugAndroidTest)
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 34
           target: google_apis
           arch: x86_64
-          profile: Pixel_6
-          emulator-options: -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect
+          emulator-options: >-
+            -no-window
+            -no-audio
+            -no-boot-anim
+            -gpu swiftshader_indirect
           disable-animations: true
           script: |
             ./gradlew :app:connectedDebugAndroidTest --stacktrace
 
-      # Ejecuta unit tests debug (para merge consistente)
       - name: Run unit tests (debug)
         run: ./gradlew :app:testDebugUnitTest --stacktrace
 
-      # Genera reporte merged (unit + androidTest). Requiere kover merge habilitado en el root.
       - name: Generate merged Kover reports
         run: |
           ./gradlew koverXmlReport koverHtmlReport --stacktrace
