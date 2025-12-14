@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="set_board_field_n_queens">N-QUEENS GAME</string>
+    <string name="set_board_field_size_range_n">N Size (must be in the range 4–9)</string>
+    <string name="set_board_btn_random_n">Random N!</string>
+    <string name="set_board_btn_lets_go">Let\'s GO!</string>
+
+    <string name="score_panel_title">Scores for N=%1$s</string>
+    <string name="score_panel_empty_state_n_not_selected">Select an N (4–9)"</string>
+    <string name="score_panel_empty_state_no_data">NO SCORES YET</string>
+
+</resources>

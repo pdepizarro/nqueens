@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="header_indicator_queens">Queens: %1$s</string>
+    <string name="header_btn_reset">Reset</string>
+
+    <string name="win_dialog_title">¡Well done! 👑</string>
+    <string name="win_dialog_new_record">¡New Record!</string>
+    <string name="win_dialog_current_record">Current record: %1$s</string>
+    <string name="win_dialog_your_time">Your time: %1$s</string>
+    <string name="win_dialog_btn_play_again">Play again</string>
+    <string name="win_dialog_btn_go_back">Go back</string>
+
+</resources>
