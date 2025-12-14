@@ -83,8 +83,19 @@ jobs:
       - name: Enable KVM
         run: |
           sudo apt-get update
-          sudo apt-get install -y qemu-kvm
+          sudo apt-get install -y qemu-kvm cpu-checker
           sudo usermod -aG kvm $USER || true
+          ls -la /dev/kvm || true
+          groups || true
+          kvm-ok || true
+
+      - name: Reset ADB
+        run: |
+          adb kill-server || true
+          pkill -f adb || true
+          rm -rf ~/.android/adbkey* || true
+          adb start-server
+          adb devices
 
       - name: Run instrumentation tests (connectedDebugAndroidTest)
         uses: reactivecircus/android-emulator-runner@v2
@@ -92,13 +103,17 @@ jobs:
           api-level: 34
           target: google_apis
           arch: x86_64
+          disable-animations: true
+          emulator-boot-timeout: 900
           emulator-options: >-
             -no-window
             -no-audio
             -no-boot-anim
+            -no-snapshot
             -gpu swiftshader_indirect
-          disable-animations: true
+            -accel off
           script: |
+            adb devices
             ./gradlew :app:connectedDebugAndroidTest --stacktrace
 
       - name: Run unit tests (debug)
@@ -155,4 +170,3 @@ jobs:
         with:
           name: app-debug-apk
           path: app/build/outputs/apk/debug/*.apk
-
