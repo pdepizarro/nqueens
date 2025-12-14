@@ -87,14 +87,6 @@ jobs:
           sudo udevadm trigger --name-match=kvm
           ls -la /dev/kvm
 
-      - name: Reset ADB
-        run: |
-          adb kill-server || true
-          pkill -f adb || true
-          rm -rf ~/.android/adbkey* || true
-          adb start-server
-          adb devices
-
       - name: Run instrumentation tests (connectedDebugAndroidTest)
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -112,7 +104,12 @@ jobs:
             -gpu swiftshader_indirect
             -no-metrics
           script: |
+            adb kill-server || true
+            pkill -f adb || true
+            rm -rf ~/.android/adbkey* || true
+            adb start-server
             adb devices
+
             ./gradlew :app:connectedDebugAndroidTest --stacktrace
 
       - name: Run unit tests (debug)
