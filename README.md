@@ -65,8 +65,6 @@ Most logic lives in **Domain** (pure Kotlin), allowing fast and reliable unit te
 
 ## 🧩 Modules & Responsibilities
 
-> Names may vary slightly depending on the branch, but the responsibility boundaries remain the same.
-
 - **`:app`**
   - Application entry point (Android app module)
   - App navigation host / wiring
