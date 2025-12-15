@@ -4,10 +4,12 @@ import com.pph.game.component.Header
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.pph.game.component.Board
 import com.pph.game.component.WinDialog
+import com.pph.shared.testing.TestTags
 import com.pph.uicomponents.components.LoadingComponent
 
 @Composable
@@ -24,6 +26,7 @@ fun GameScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp)
+                .testTag(TestTags.PROGRESS_INDICATOR)
         ) {
             Header(
                 elapsedMillis = uiState.elapsedMillis,

@@ -34,9 +34,14 @@ class GameInteractionUiTest {
         rule.enterPlayerName(playerName)
         rule.selectN(boardN)
         rule.onNodeWithTag(TestTags.SETBOARD_PLAY_BTN).performClick()
-        rule.waitForIdle()
+
+        rule.waitUntil(timeoutMillis = 5_000) {
+            rule.onAllNodesWithTag(TestTags.GAME_BOARD).fetchSemanticsNodes().isNotEmpty()
+        }
+
         rule.onNodeWithTag(TestTags.GAME_BOARD).assertIsDisplayed()
     }
+
 
     @Test fun tapCell_placesQueen_andTapAgain_removesIt() {
         goToGame(4, "A")
@@ -53,7 +58,6 @@ class GameInteractionUiTest {
     @Test fun cannotPlaceMoreThanNQueens() {
         goToGame(4, "A")
 
-        // 4 reinas en celdas distintas
         rule.tapCell(0, 0)
         rule.tapCell(1, 1)
         rule.tapCell(2, 2)
@@ -61,7 +65,6 @@ class GameInteractionUiTest {
         rule.waitForIdle()
         rule.onAllNodesWithContentDescription("Queen").assertCountEquals(4)
 
-        // Intento poner una 5ª (no debería)
         rule.tapCell(0, 1)
         rule.waitForIdle()
         rule.onAllNodesWithContentDescription("Queen").assertCountEquals(4)

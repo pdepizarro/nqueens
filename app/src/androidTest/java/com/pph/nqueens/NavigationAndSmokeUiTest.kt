@@ -29,6 +29,10 @@ class NavigationAndSmokeUiTest {
         rule.enterPlayerName("Morrison")
         rule.onNodeWithTag(TestTags.SETBOARD_PLAY_BTN).performClick()
 
+        rule.waitUntil(timeoutMillis = 5_000) {
+            rule.onAllNodesWithTag(TestTags.GAME_BOARD).fetchSemanticsNodes().isNotEmpty()
+        }
+
         rule.onNodeWithTag(TestTags.GAME_BOARD).assertIsDisplayed()
         rule.onNodeWithTag(TestTags.GAME_HEADER_QUEENS).assertIsDisplayed()
     }

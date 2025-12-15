@@ -8,5 +8,4 @@
     <string name="score_panel_title">Scores for N=%1$s</string>
     <string name="score_panel_empty_state_n_not_selected">Select an N (4–9)"</string>
     <string name="score_panel_empty_state_no_data">NO SCORES YET</string>
-
 </resources>

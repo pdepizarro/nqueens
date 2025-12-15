@@ -21,6 +21,8 @@ object TestTags {
     const val GAME_RESET_BTN = "game:resetBtn"
 
     const val GAME_BOARD = "game:board"
+
+    const val PROGRESS_INDICATOR = "game:progressIndicator"
     fun boardCell(row: Int, col: Int) = "game:cell:r$row:c$col"
 
     const val WIN_DIALOG = "win:dialog"
