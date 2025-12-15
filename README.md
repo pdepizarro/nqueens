@@ -59,8 +59,8 @@ Most logic lives in **Domain** (pure Kotlin), allowing fast and reliable unit te
 
 - **`:app`**
   - Application entry point (Android app module)
-  - App navigation / wiring
-  - DI setup and composition of feature modules
+  - App navigation host / wiring
+  - DI setup and composition of feature + core modules
 
 - **Feature modules** (presentation + UI)
   - Example: `:feature:setboard`, `:feature:game` (or equivalent)
@@ -77,7 +77,19 @@ Most logic lives in **Domain** (pure Kotlin), allowing fast and reliable unit te
     - Repository implementations
     - Room DB + DAOs + data sources
     - Mapping between DB models and domain models
-  - **`:core:shared` / `:shared`**
+
+- **Reusable UI libraries (project-agnostic)**
+  - **`:core:uicomponents`**
+    - A reusable UI toolkit of **generic Compose components** (cards, panels, small widgets, typography helpers, etc.)
+    - Designed to be **drop-in** across different apps/projects
+    - Contains *visual building blocks*, not N-Queens business rules
+  - **`:core:uinavigation`**
+    - A reusable navigation helper library
+    - Provides an opinionated way to define **navigation flows** (graph/flow definitions, destinations, and helpers)
+    - Keeps navigation concerns consistent and decoupled from features
+
+- **Shared utilities**
+  - **`:shared` / `:core:shared`**
     - Shared models (UI-facing), mappers, and cross-feature utilities
 
 ---
@@ -91,6 +103,15 @@ graph TD
   A[:app] --> B[Feature: SetBoard]
   A --> C[Feature: Game]
 
+  %% Reusable UI libraries
+  B --> UIC[:core:uicomponents]
+  C --> UIC
+
+  %% Navigation helpers
+  A --> UIN[:core:uinavigation]
+  B --> UIN
+  C --> UIN
+
   %% Presentation/UI depends on Domain
   B --> D[:core:domain]
   C --> D
@@ -101,13 +122,18 @@ graph TD
   %% App composes data + features (DI wiring)
   A --> E
 
-  %% Optional shared module used by features
+  %% Optional shared module used by features and data
   B --> F[:shared]
   C --> F
-
-  %% Data may also use shared mapping utilities (optional)
   E --> F
 ```
+
+### Reading the diagram
+- **Features never depend on Data** directly. They talk to **Domain** via use cases.
+- **Data implements Domain contracts** (repositories) and is wired into the app through DI.
+- **`:core:uicomponents`** is a **reusable UI library**: features consume it, but it contains no domain rules.
+- **`:core:uinavigation`** provides **flow-based navigation helpers** to keep routing consistent and decoupled.
+- **Domain stays framework-agnostic** (pure Kotlin), making it easy to test and evolve.
 
 ### Reading the diagram
 - **Features never depend on Data** directly. They talk to **Domain** via use cases.
@@ -197,4 +223,3 @@ Minimum supported board size: **N = 4**
 ---
 
 Thank you for reviewing this submission ♛
-
