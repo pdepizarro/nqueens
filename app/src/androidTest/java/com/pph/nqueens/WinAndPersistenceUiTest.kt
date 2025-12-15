@@ -16,10 +16,13 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class WinAndPersistenceUiTest {
 
-    @get:Rule(order = 0) val hiltRule = HiltAndroidRule(this)
-    @get:Rule(order = 1) val rule = createAndroidComposeRule<com.pph.nqueens.ui.MainActivity>()
+    @get:Rule(order = 0)
+    val hiltRule = HiltAndroidRule(this)
+    @get:Rule(order = 1)
+    val rule = createAndroidComposeRule<com.pph.nqueens.ui.MainActivity>()
 
-    @Before fun setup() {
+    @Before
+    fun setup() {
         hiltRule.inject()
         TestStorage.clearGamePrefsDataStore(rule.activity)
 
@@ -35,7 +38,8 @@ class WinAndPersistenceUiTest {
         rule.onNodeWithTag(TestTags.GAME_BOARD).assertIsDisplayed()
     }
 
-    @Test fun solvingN4_showsWinDialog() {
+    @Test
+    fun solvingN4_showsWinDialog() {
         startN4("Winner")
 
         rule.solveN4_solutionA()
@@ -46,7 +50,8 @@ class WinAndPersistenceUiTest {
         rule.onNodeWithTag(TestTags.WIN_TIME).assertIsDisplayed()
     }
 
-    @Test fun playAgain_fromWinDialog_resetsBoard_andHidesDialog() {
+    @Test
+    fun playAgain_fromWinDialog_resetsBoard_andHidesDialog() {
         startN4("Winner")
 
         rule.solveN4_solutionA()
@@ -58,10 +63,12 @@ class WinAndPersistenceUiTest {
 
         rule.onNodeWithTag(TestTags.WIN_DIALOG).assertDoesNotExist()
         rule.onAllNodesWithContentDescription("Queen").assertCountEquals(0)
-        rule.onNodeWithTag(TestTags.GAME_HEADER_QUEENS).assertTextContains("0 / 4", substring = true)
+        rule.onNodeWithTag(TestTags.GAME_HEADER_QUEENS)
+            .assertTextContains("0 / 4", substring = true)
     }
 
-    @Test fun goBack_fromWinDialog_returnsToSetBoard() {
+    @Test
+    fun goBack_fromWinDialog_returnsToSetBoard() {
         startN4("Winner")
 
         rule.solveN4_solutionA()
@@ -73,7 +80,8 @@ class WinAndPersistenceUiTest {
         rule.onNodeWithTag(TestTags.SETBOARD_TITLE).assertIsDisplayed()
     }
 
-    @Test fun finishingGame_savesScore_andShowsInSetBoardScorePanel() {
+    @Test
+    fun finishingGame_savesScore_andShowsInSetBoardScorePanel() {
         startN4("Morrison")
 
         rule.solveN4_solutionA()

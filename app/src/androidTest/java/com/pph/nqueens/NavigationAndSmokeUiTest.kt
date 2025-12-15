@@ -17,15 +17,19 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class NavigationAndSmokeUiTest {
 
-    @get:Rule(order = 0) val hiltRule = HiltAndroidRule(this)
-    @get:Rule(order = 1) val rule = createAndroidComposeRule<com.pph.nqueens.ui.MainActivity>()
+    @get:Rule(order = 0)
+    val hiltRule = HiltAndroidRule(this)
+    @get:Rule(order = 1)
+    val rule = createAndroidComposeRule<com.pph.nqueens.ui.MainActivity>()
 
-    @Before fun setup() {
+    @Before
+    fun setup() {
         hiltRule.inject()
         TestStorage.clearGamePrefsDataStore(rule.activity)
     }
 
-    @Test fun letsGo_navigatesToGameScreen() {
+    @Test
+    fun letsGo_navigatesToGameScreen() {
         rule.enterPlayerName("Morrison")
         rule.onNodeWithTag(TestTags.SETBOARD_PLAY_BTN).performClick()
 
@@ -37,7 +41,8 @@ class NavigationAndSmokeUiTest {
         rule.onNodeWithTag(TestTags.GAME_HEADER_QUEENS).assertIsDisplayed()
     }
 
-    @Test fun gameResetButton_exists() {
+    @Test
+    fun gameResetButton_exists() {
         rule.enterPlayerName("Morrison")
         rule.onNodeWithTag(TestTags.SETBOARD_PLAY_BTN).performClick()
         rule.onNodeWithTag(TestTags.GAME_RESET_BTN).assertIsDisplayed()

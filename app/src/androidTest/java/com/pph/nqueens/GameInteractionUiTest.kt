@@ -19,10 +19,13 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class GameInteractionUiTest {
 
-    @get:Rule(order = 0) val hiltRule = HiltAndroidRule(this)
-    @get:Rule(order = 1) val rule = createAndroidComposeRule<com.pph.nqueens.ui.MainActivity>()
+    @get:Rule(order = 0)
+    val hiltRule = HiltAndroidRule(this)
+    @get:Rule(order = 1)
+    val rule = createAndroidComposeRule<com.pph.nqueens.ui.MainActivity>()
 
-    @Before fun setup() {
+    @Before
+    fun setup() {
         hiltRule.inject()
         TestStorage.clearGamePrefsDataStore(rule.activity)
         rule.activityRule.scenario.recreate()
@@ -43,7 +46,8 @@ class GameInteractionUiTest {
     }
 
 
-    @Test fun tapCell_placesQueen_andTapAgain_removesIt() {
+    @Test
+    fun tapCell_placesQueen_andTapAgain_removesIt() {
         goToGame(4, "A")
 
         rule.tapCell(0, 0)
@@ -55,7 +59,8 @@ class GameInteractionUiTest {
         rule.onAllNodesWithContentDescription("Queen").assertCountEquals(0)
     }
 
-    @Test fun cannotPlaceMoreThanNQueens() {
+    @Test
+    fun cannotPlaceMoreThanNQueens() {
         goToGame(4, "A")
 
         rule.tapCell(0, 0)
@@ -70,7 +75,8 @@ class GameInteractionUiTest {
         rule.onAllNodesWithContentDescription("Queen").assertCountEquals(4)
     }
 
-    @Test fun resetButton_clearsQueens() {
+    @Test
+    fun resetButton_clearsQueens() {
         goToGame(4, "A")
 
         rule.tapCell(0, 0)
