@@ -58,7 +58,6 @@ class GameInteractionUiTest {
     @Test fun cannotPlaceMoreThanNQueens() {
         goToGame(4, "A")
 
-        // 4 reinas en celdas distintas
         rule.tapCell(0, 0)
         rule.tapCell(1, 1)
         rule.tapCell(2, 2)
@@ -66,7 +65,6 @@ class GameInteractionUiTest {
         rule.waitForIdle()
         rule.onAllNodesWithContentDescription("Queen").assertCountEquals(4)
 
-        // Intento poner una 5ª (no debería)
         rule.tapCell(0, 1)
         rule.waitForIdle()
         rule.onAllNodesWithContentDescription("Queen").assertCountEquals(4)
