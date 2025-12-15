@@ -218,8 +218,6 @@ The workflow is triggered automatically on **pull requests to `develop` or `main
 3. Sync Gradle
 4. Run the app on an emulator or physical device
 
-Minimum supported board size: **N = 4**
-
 ---
 
 Thank you for reviewing this submission ♛
