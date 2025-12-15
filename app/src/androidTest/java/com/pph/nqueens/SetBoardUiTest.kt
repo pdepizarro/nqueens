@@ -23,8 +23,10 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class SetBoardUiTest {
 
-    @get:Rule(order = 0) val hiltRule = HiltAndroidRule(this)
-    @get:Rule(order = 1) val rule = createAndroidComposeRule<com.pph.nqueens.ui.MainActivity>()
+    @get:Rule(order = 0)
+    val hiltRule = HiltAndroidRule(this)
+    @get:Rule(order = 1)
+    val rule = createAndroidComposeRule<com.pph.nqueens.ui.MainActivity>()
 
     @Before
     fun setup() {
@@ -36,17 +38,20 @@ class SetBoardUiTest {
     fun startScreen_showsTitleAndScoresPanel() {
         rule.onNodeWithTag(TestTags.SETBOARD_TITLE).assertIsDisplayed()
         rule.onNodeWithTag(TestTags.SCORES_PANEL).assertIsDisplayed()
-        rule.onNodeWithTag(TestTags.SCORES_TITLE).assertTextContains("Scores for N=", substring = true)
+        rule.onNodeWithTag(TestTags.SCORES_TITLE)
+            .assertTextContains("Scores for N=", substring = true)
     }
 
-    @Test fun playDisabled_untilPlayerNameEntered() {
+    @Test
+    fun playDisabled_untilPlayerNameEntered() {
         rule.enterPlayerName("")
         rule.onNodeWithTag(TestTags.SETBOARD_PLAY_BTN).assertIsNotEnabled()
         rule.enterPlayerName("Alex")
         rule.onNodeWithTag(TestTags.SETBOARD_PLAY_BTN).assertIsEnabled()
     }
 
-    @Test fun dropdownChange_updatesScoresTitle() {
+    @Test
+    fun dropdownChange_updatesScoresTitle() {
         rule.selectN(4)
         rule.onNodeWithTag(TestTags.SCORES_TITLE)
             .assertTextContains("N=4", substring = true)
@@ -55,16 +60,19 @@ class SetBoardUiTest {
             .assertTextContains("N=9", substring = true)
     }
 
-    @Test fun randomN_changesScoresTitleToSomeValidN() {
+    @Test
+    fun randomN_changesScoresTitleToSomeValidN() {
         rule.onNodeWithTag(TestTags.SETBOARD_RANDOM_BTN).performClick()
         rule.waitForIdle()
         rule.onNodeWithTag(TestTags.SCORES_TITLE).assertExists()
     }
 
-    @Test fun scoresEmpty_showsNoScoresYet_whenValidNAndNoResults() {
+    @Test
+    fun scoresEmpty_showsNoScoresYet_whenValidNAndNoResults() {
         rule.selectN(5)
         rule.waitForIdle()
         rule.onNodeWithTag(TestTags.SCORES_EMPTY).assertIsDisplayed()
-        rule.onNodeWithTag(TestTags.SCORES_EMPTY).assertTextContains("NO SCORES YET", ignoreCase = false)
+        rule.onNodeWithTag(TestTags.SCORES_EMPTY)
+            .assertTextContains("NO SCORES YET", ignoreCase = false)
     }
 }
