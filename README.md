@@ -33,6 +33,16 @@ This project was designed not only as a technical solution to the challenge, but
 
 ---
 
+
+## ▶️ Build & Run
+
+1. Clone the repository
+2. Open the project in **Android Studio**
+3. Sync Gradle
+4. Run the app on an emulator or physical device
+
+---
+
 ## 🧠 Architecture
 
 This project follows **Clean Architecture principles** with a deliberately lean implementation, optimized for clarity and extensibility.
@@ -208,15 +218,6 @@ The workflow is triggered automatically on **pull requests to `develop` or `main
 - **Kover** – Code coverage
 - **ktlint** – Code style
 - **GitHub Actions** – CI/CD
-
----
-
-## ▶️ Build & Run
-
-1. Clone the repository
-2. Open the project in **Android Studio**
-3. Sync Gradle
-4. Run the app on an emulator or physical device
 
 ---
 
