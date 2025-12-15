@@ -42,9 +42,11 @@ class GameViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            observeBoardNUseCase().distinctUntilChanged().collect { n ->
-                setBoardN(n)
-            }
+            observeBoardNUseCase()
+                .distinctUntilChanged()
+                .collect { n ->
+                    setBoardN(n)
+                }
         }
 
         viewModelScope.launch {
@@ -182,7 +184,8 @@ class GameViewModel @Inject constructor(
             queens = emptySet(),
             conflictLine = emptySet(),
             showWinDialog = false,
-            isNewRecord = false
+            isNewRecord = false,
+            isLoading = false
         )
     }
 
@@ -195,7 +198,8 @@ class GameViewModel @Inject constructor(
         showWinDialog: Boolean = _state.value.showWinDialog,
         bestTimeMillis: Long? = _state.value.bestTimeMillis,
         isNewRecord: Boolean = _state.value.isNewRecord,
-        playerName: String = _state.value.playerName
+        playerName: String = _state.value.playerName,
+        isLoading: Boolean = _state.value.isLoading
     ) {
         _state.value = GameScreenState(
             boardN = boardN,
@@ -206,7 +210,8 @@ class GameViewModel @Inject constructor(
             showWinDialog = showWinDialog,
             bestTimeMillis = bestTimeMillis,
             isNewRecord = isNewRecord,
-            playerName = playerName
+            playerName = playerName,
+            isLoading = isLoading
         )
     }
 
