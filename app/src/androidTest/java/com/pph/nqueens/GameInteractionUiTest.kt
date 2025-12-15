@@ -34,9 +34,14 @@ class GameInteractionUiTest {
         rule.enterPlayerName(playerName)
         rule.selectN(boardN)
         rule.onNodeWithTag(TestTags.SETBOARD_PLAY_BTN).performClick()
-        rule.waitForIdle()
+
+        rule.waitUntil(timeoutMillis = 5_000) {
+            rule.onAllNodesWithTag(TestTags.GAME_BOARD).fetchSemanticsNodes().isNotEmpty()
+        }
+
         rule.onNodeWithTag(TestTags.GAME_BOARD).assertIsDisplayed()
     }
+
 
     @Test fun tapCell_placesQueen_andTapAgain_removesIt() {
         goToGame(4, "A")
