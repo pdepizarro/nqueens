@@ -26,8 +26,6 @@ fun LoadingComponent(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(stringResource(id = R.string.loading_component_message))
-            Spacer(modifier = Modifier.height(16.dp))
             CircularProgressIndicator(
                 modifier = Modifier.testTag("cpiTag")
             )

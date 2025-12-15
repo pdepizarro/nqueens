@@ -11,8 +11,9 @@ data class GameScreenState(
     val showWinDialog: Boolean = false,
     val isNewRecord: Boolean = false,
     val playerName: String = "",
-    val bestTimeMillis: Long? = null
+    val bestTimeMillis: Long? = null,
+    val isLoading: Boolean = true,
 
-) {
+    ) {
     val queensCount: Int get() = queens.size
 }
